@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Lisan Al Gaib</h1>
+    <script>
+         async function buscaDados() {
+            const resposta = await fetch("http:/localhost:8000/estudantes")
+            console.log(resposta)  
+            if (resposta.status===200){
+                const dados = await resposta.json()
+                console.log(dados)
+                console.log(dados[0].nome)
+                // criem um li apatir de um vetor dados
+                //coloque o texto que vem do banco no li
+                //Adicione o li na ul com id "minha lista"
+            }else{
+                if(resposta.status===400){
+                    const dados = await resposta.json()
+                    alert(dados.mensagem)
+                }else{
+                    alert("Erro não identificado")
+                }
+            }
+         }
+         buscaDados()
+    </script>
+</body>
+</html>
