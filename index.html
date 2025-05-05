@@ -2,32 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Título modificado</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título Modificado</title>
 </head>
 <body>
-    <h1>Lisan Al Gaib</h1>
+    <a href="/cadastro.html"></a>
+    <h1>Lista de estudantes!</h1>
+    <ul id="minhalista">
+
+    </ul>
     <script>
-         async function buscaDados() {
-            const resposta = await fetch("http:/localhost:8000/estudantes")
-            console.log(resposta)  
-            if (resposta.status===200){
+        async function buscaDados(){
+            const resposta = await fetch("http://localhost:8000/estudantes")
+            console.log(resposta)
+            if(resposta.status ===200){
                 const dados = await resposta.json()
                 console.log(dados)
                 console.log(dados[0].nome)
-                // criem um li apatir de um vetor dados
-                //coloque o texto que vem do banco no li
-                //Adicione o li na ul com id "minha lista"
+                const ul = document.getElementById("minhalista")
+                for (let i = 0; i < dados.length; i++) {
+                    const element = dados[i];
+                    const novoli = document.createElement("li")
+                    novoli.innerText = element.nome
+                    ul.appendChild(novoli)
+                }
+
+                //Criem li a partir do vetor dados
+                //Coloque o texto que vem do banco no li
+                //Adicione o li na ul com id "minhalista" 
             }else{
-                if(resposta.status===400){
+                if(resposta.status ===400){
                     const dados = await resposta.json()
                     alert(dados.mensagem)
-                }else{
-                    alert("Erro não identificado")
+                }
+                else{
+                    alert("ERRO NÃO IDENTIFICADO");
                 }
             }
-         }
-         buscaDados()
+        }
+        buscaDados()
     </script>
 </body>
 </html>
