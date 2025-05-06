@@ -1,52 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Estudante</title>
+    <title>cadastro de cliente</title>
 </head>
+
 <body>
     <form onsubmit="event.preventDefault();trataform()">
-        <label for="id">id</label>
-        <input type="text" id="id" name="id">
+        <label for="gmail">gmail</label>
+        <input type="text" id="gmail" name="gmail">
         <label for="nome">nome</label>
         <input type="text" id="nome" name="nome">
         <input type="submit" value="Cadastrar">
     </form>
-    <script>
-        async function trataform(){
-            const inputId = document.getElementById("id")
+    <script> //Rayka
+        async function trataform() {
+            const inputgmail = document.getElementById("gmail")
             const inputNome = document.getElementById("nome")
-            const id = inputId.value
             const nome = inputNome.value
+            const gmail = inputgmail.value
 
-           const objEstudante = {
-            id: id,
-            nome: nome
-           }
-           try{
-           const resposta =  await ("http://localhost:8000/estudantes",{
-            headers:{
-                'Content-Type':'application/json'
-            },
-            method:"POST",
-            body: JSON.stringify(objEstudante)
-           })
-           if(resposta.status===200){
-            alert("Estudante cadastrado com sucesso")
-           }
-           if(resposta.status===404){
-           alert("Erro não identificado")
-        }
-        if(resposta.status===400){
-            const dados = await resposta.json()
-           alert(`Erro do lado do BACKEND:"\n${dados.mensagem}`)
-        }
+            const objcliente= {
+                nome
+            }
+            try{
+                const resposta = await fetch("http://localhost:8000/clientes",{
+                    headers:{
+                        'Content-Type': 'application/json'
+                    },
+                    method:"POST",
+                    body: JSON.stringify(objclientes)
+                })
 
-        }catch(erro){
-            alert("Eroo: Erro na requisição do FETCH\n"+"Você ligou o BACKEND com npm run dev")
+                if(resposta.status===200){
+                    alert("cliente cadastrado com sucesso!")
+                }
+                if(resposta.status===400){
+                    const dados = await resposta.json()
+                    alert(`Erro do lado do backend:"\n${dados.mensagem}`)
+                }
+                if(resposta.status===404){
+                    alert("Erro não identificado.")
+                }
+
+            }catch(erro){
+                alert("Erro: Erro na requisição do FETCH\n"+
+                 "Você ligou o BACKEND com npm run dev?")
+            }
         }
-    }
+      
     </script>
+
 </body>
+
 </html>
