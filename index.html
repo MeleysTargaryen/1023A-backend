@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maison Evangeline</title>
+    <title>Estoque de Sapatos</title>
 </head>
+
 <style>
     
 </style>
 <body>
-    <a href="/cadastro.html"></a>
+   
+    <a href="/Estoque.html"></a>
     <ul id="minhalista">
 
     </ul>
     <script>
         async function buscaDados(){
-            const resposta = await fetch("http://localhost:8000/estudantes")
+            const resposta = await fetch("http://localhost:8000/estoque_sapatos")
             console.log(resposta)
             if(resposta.status ===200){
                 const dados = await resposta.json()
