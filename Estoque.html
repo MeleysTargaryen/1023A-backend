@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Controle de Estoque</title>
+
     <style>
-        
-    body {
+        body {
             font-family: Arial, sans-serif;
-            background-color: #A8BEA6;
+            background-color: #EAE9E5;
             margin: 0;
             padding: 0;
         }
 
         header {
-            background-color: #6D9368;
+            background-color: #590202;
             color: #dddddd;
             padding: 20px;
             text-align: center;
@@ -22,29 +22,55 @@
 
         h1 {
             font-size: 36px;
+            font-family: 'Times New Roman', Times, serif;
         }
 
 
-        .container {
+        .container1 {
             max-width: 960px;
             margin: 20px auto;
             padding: 20px;
-            background-color:#1b4b1e8f;
+            background-color:#C3C4C6;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
-        .article {
-            margin-bottom: 40px;
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px; /* Reduzi o gap para um espaçamento mais comum entre cards */
+            padding: 20px;
         }
-
-
-        .article h2 {
-            font-size: 24px;
+     
+        .produto-sapato {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 260px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+       
+        .nome {
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+        .descrição{
+            font-size: 14px;
+            color: #777;
+        }
+        .preço {
             margin-top: 10px;
+            font-weight: bold;
+            font-size: 16px;
         }
-
-        .article p {
-            line-height: 1.6;
+    
+        .quadrado {
+            width: 250px;
+            height: 200px; /* Ajustei altura para caber o texto abaixo */
+            background-color: rgb(160, 160, 173);
+            border-radius: 50px 50px 0px 0px;
+            margin-bottom: 10px; /* Adiciona espaço entre a imagem e o texto */
         }
 
         footer {
@@ -54,14 +80,52 @@
             padding: 10px 0;
         }
     </style>
-  </head>
-     <body>
-        <header>
-            <h1>Estoque</h1>
-        </header>
-       
-        <div class="container">
-            <div class="article">
-                <img src="" alt="Imagem ">
+</head>
+<body>
+    <header>
+        <h1><em>Maison Evangeline</em></h1>
+    </header>
+   <div class="container1">
+    <h1>Controle de Estoque</h1>
+    <div class="container">
+        <div class="produto-sapato">
+            <div class="quadrado"></div>
+            <div class="nome">Salto Raysa</div>
+            <div class="descrição">Salto Alto 15cm</div>
+            <div class="preço">R$5.000</div>
+        </div>
+        <div class="produto-sapato">
+            <div class="quadrado"></div> 
+            <div class="nome">Salto Amélia</div>
+             <div class="descrição">Salto Alto 8cm</div>
+            <div class="preço">R$1,450.00</div>
+        </div>
+        <div class="produto-sapato">
+            <div class="quadrado"></div>
+            <div class="nome">Salto Kate</div>
+            <div class="descrição">Salto Alto 10cm</div>
+            <div class="preço">R$ 2.500</div>
+        </div>
+        <div class="produto-sapato">
+            <div class="quadrado"></div>
+            <div class="nome">Salto Rayka</div>
+            <div class="descrição">Salto Alto 10cm</div>
+            <div class="preço">R$ 2.500</div>
+        </div>
+        <div class="produto-sapato">
+            <div class="quadrado"></div>
+            <div class="nome">Salto Farlany</div>
+            <div class="descrição">Salto Alto 10cm</div>
+            <div class="preço">R$ 2.500</div>
+        </div>
+        <div class="produto-sapato">
+            <div class="quadrado"></div>
+            <div class="nome">Salto Victória</div>
+            <div class="descrição">Salto Alto 10cm</div>
+            <div class="preço">R$ 2.500</div>
+        </div>
+    </div>
+    </div>
+
 </body>
 </html>
