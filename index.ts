@@ -5,31 +5,32 @@ import cors from '@fastify/cors';
 const app = fastify();
 app.register(cors);
 
-// Função para criar uma conexão com o banco de dados
+// Criar uma conexão com o banco de dados
 async function createDatabaseConnection(): Promise<Connection> {
     return await mysql.createConnection({
         host: 'localhost',
-        user: '',
+        user: 'root', 
         password: '',
         database: 'Sapatos'
     });
 }
 
-// Rota de test
+// Rota de teste
 app.get('/', async (request: FastifyRequest, reply: FastifyReply) => {
     reply.send("Fastify Funcionando");
 });
 
-// Rota para buscar os dados do estoque de sapatos
+// Buscar os dados do estoque de sapatos
 app.get('/estoque_sapatos', async (request: FastifyRequest, reply: FastifyReply) => {
     let conn: Connection | null = null;
+    
     try {
         conn = await createDatabaseConnection();
-        const [rows] = await conn.query("SELECT * FROM estoque_sapatos");
+        const [rows] = await conn.query("SELECT * FROM estoque_sapatos ");
         reply.status(200).send(rows);
     } catch (erro: any) {
         console.error("Erro ao buscar estoque:", erro);
-        
+
         if (erro.code === 'ECONNREFUSED') {
             reply.status(400).send({ mensagem: "ERRO: LIGUE O LARAGAO => Conexão Recusada" });
         } else if (erro.code === 'ER_BAD_DB_ERROR') {
