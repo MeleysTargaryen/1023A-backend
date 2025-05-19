@@ -1,91 +1,153 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estoque de Sapatos</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maison Evangeline</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        h1 {
-            color: #333;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(243, 241, 241);
+            padding-top: 100px;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #590202;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+           
+
+        }
+
+         h1 {
+            font-size: 24px;
+            letter-spacing: 1px;
+            font-family: 'Times New Roman', Times, serif;
+            color: white;
+        }
+
+        .container {
+            background-color: #c3c4c6;
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .container h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .container p {
+            font-size: 16px;
+            margin-bottom: 30px;
         }
 
         form {
             display: flex;
             flex-direction: column;
+            gap: 15px;
             align-items: center;
-            margin-bottom: 1.5rem;
-            gap: 0.5rem;
         }
 
         label {
+            align-self: flex-start;
             font-weight: bold;
+            font-size: 14px;
         }
 
         input {
             width: 100%;
-            max-width: 300px;
-            padding: 0.4rem;
-            margin-bottom: 0.5rem;
-            box-sizing: border-box;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #ffffff;
+          
         }
 
         button {
-            padding: 0.4rem 1rem;
+            padding: 10px 20px;
+            background-color: #590202;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
         }
 
-        ul {
-            list-style: disc;
-            padding-left: 2rem;
-            max-width: 600px;
+        button:hover {
+            background-color: #6e5a58;
+        }
+
+        #resultadoBusca {
+            margin-top: 30px;
+            text-align: left;
+            padding-left: 20px;
         }
 
         .erro {
             color: red;
+            margin-top: 15px;
             font-weight: bold;
-            margin-top: 1rem;
         }
 
         @media (max-width: 600px) {
-            body {
-                margin: 1rem;
+            .container {
+                width: 90%;
+                padding: 20px;
             }
-            input, button {
-                width: 100%;
-                max-width: 100%;
+
+            input,
+            button {
+                font-size: 16px;
             }
-        }
-        header {
-            background-color: #f8f8f8;
-            padding: 1rem;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
+
 <body>
     <header>
-        <h1>Estoque de Sapatos</h1>
+        <h1>Maison Evangeline</h1>
     </header>
-    <form id="formBusca">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" placeholder="Digite o nome">
-        <label for="tamanho">Tamanho:</label>
-        <input type="number" id="tamanho" name="tamanho" placeholder="Digite o tamanho">
-        <button type="submit">Buscar Sapato</button>
-    </form>
-    <ul id="resultadoBusca"></ul>
-    <div id="mensagemErro" class="erro"></div>
+
+    <div class="container">
+        <h2>OS MELHORES SAPATOS ESTÃO AQUI</h2>
+        <p>O que você procura</p>
+        <form id="formBusca">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" placeholder="Digite o nome do sapato" />
+
+            <label for="tamanho">Tamanho:</label>
+            <input type="number" id="tamanho" name="tamanho" placeholder="Digite o tamanho" />
+
+            <button type="submit">Buscar Sapato</button>
+        </form>
+
+        <ul id="resultadoBusca"></ul>
+        <div id="mensagemErro" class="erro"></div>
+    </div>
+
     <script>
         async function buscarSapato(filtros) {
-            let url = "http://localhost:8000/sapatos";
+            let url = "http://localhost:8000/Sapatos";
             const params = [];
             if (filtros.nome) params.push(`nome=${encodeURIComponent(filtros.nome)}`);
             if (filtros.tamanho) params.push(`tamanho=${encodeURIComponent(filtros.tamanho)}`);
@@ -120,7 +182,7 @@
             }
         }
 
-        document.getElementById("formBusca").addEventListener("submit", function(e) {
+        document.getElementById("formBusca").addEventListener("submit", function (e) {
             e.preventDefault();
             const nome = document.getElementById("nome").value.trim();
             const tamanho = document.getElementById("tamanho").value.trim();
@@ -128,4 +190,5 @@
         });
     </script>
 </body>
+
 </html>

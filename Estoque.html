@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Controle de Estoque</title>
 
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Controle de Estoque</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #EAE9E5;
+            background-color: #eae9e5;
             margin: 0;
             padding: 0;
         }
@@ -25,107 +25,156 @@
             font-family: 'Times New Roman', Times, serif;
         }
 
-
         .container1 {
             max-width: 960px;
             margin: 20px auto;
             padding: 20px;
-            background-color:#C3C4C6;
+            background-color: #c3c4c6;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
+        .bloco-estoque {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background-color: #d0cccc;
+            padding: 20px;
+            max-width: 960px;
+            margin: 20px auto;
+            border-radius: 10px;
+        }
+
+        .bloco-estoque video {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .texto {
+            flex: 1;
+        }
+
+        .texto p {
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .texto button {
+            padding: 10px 20px;
+            background-color: #590202;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
         .container {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 20px; /* Reduzi o gap para um espaçamento mais comum entre cards */
+            gap: 20px;
             padding: 20px;
         }
-     
+
         .produto-sapato {
             background: white;
             border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             width: 260px;
             padding: 15px;
             text-align: center;
-            transition: transform 0.2s ease;
         }
-       
+
+        .produto-sapato img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50px 50px 0 0;
+            background-color: #ccc;
+        }
+
         .nome {
-            margin: 15px 0 5px;
             font-weight: bold;
+            margin-top: 10px;
         }
-        .descrição{
+
+        .descrição {
             font-size: 14px;
             color: #777;
         }
+
         .preço {
-            margin-top: 10px;
-            font-weight: bold;
             font-size: 16px;
-        }
-    
-        .quadrado {
-            width: 250px;
-            height: 200px; /* Ajustei altura para caber o texto abaixo */
-            background-color: rgb(160, 160, 173);
-            border-radius: 50px 50px 0px 0px;
-            margin-bottom: 10px; /* Adiciona espaço entre a imagem e o texto */
+            font-weight: bold;
+            margin-top: 10px;
         }
 
-        footer {
-            background-color: #f5adcb;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
+        @media (max-width: 768px) {
+            .bloco-estoque {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .bloco-estoque video {
+                width: 100%;
+                height: auto;
+            }
+
+            .texto {
+                text-align: center;
+            }
         }
     </style>
 </head>
+
 <body>
+
     <header>
         <h1><em>Maison Evangeline</em></h1>
     </header>
-   <div class="container1">
-    <h1>Controle de Estoque</h1>
-    <div class="container">
-        <div class="produto-sapato">
-            <div class="quadrado"></div>
-            <div class="nome">Salto Raysa</div>
-            <div class="descrição">Salto Alto 15cm</div>
-            <div class="preço">R$5.000</div>
-        </div>
-        <div class="produto-sapato">
-            <div class="quadrado"></div> 
-            <div class="nome">Salto Amélia</div>
-             <div class="descrição">Salto Alto 8cm</div>
-            <div class="preço">R$1,450.00</div>
-        </div>
-        <div class="produto-sapato">
-            <div class="quadrado"></div>
-            <div class="nome">Salto Kate</div>
-            <div class="descrição">Salto Alto 10cm</div>
-            <div class="preço">R$ 2.500</div>
-        </div>
-        <div class="produto-sapato">
-            <div class="quadrado"></div>
-            <div class="nome">Salto Rayka</div>
-            <div class="descrição">Salto Alto 10cm</div>
-            <div class="preço">R$ 2.500</div>
-        </div>
-        <div class="produto-sapato">
-            <div class="quadrado"></div>
-            <div class="nome">Salto Farlany</div>
-            <div class="descrição">Salto Alto 10cm</div>
-            <div class="preço">R$ 2.500</div>
-        </div>
-        <div class="produto-sapato">
-            <div class="quadrado"></div>
-            <div class="nome">Salto Victória</div>
-            <div class="descrição">Salto Alto 10cm</div>
-            <div class="preço">R$ 2.500</div>
+
+    <!-- Bloco com vídeo -->
+    <div class="bloco-estoque">
+        <video controls>
+            <source src="https://cdn.cosmos.so/31fbae5b-3915-4891-9b9f-51928fb6bf18.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo.
+        </video>
+        <div class="texto">
+            <p>Confira o nosso estoque</p>
+            <button>Ver Estoque</button>
         </div>
     </div>
+
+    <!-- Produtos com imagem -->
+    <div class="container1">
+        <h1>Produtos Disponíveis</h1>
+        <div class="container">
+            <div class="produto-sapato">
+                <img src="https://cdn.cosmos.so/e8e753aa-bbd3-4118-85d2-74c0c1b9a52b?format=jpeg" alt="Salto Raysa">
+                <div class="nome">Salto Raysa</div>
+                <div class="descrição">Salto Alto 15cm</div>
+                <div class="preço">R$5.000</div>
+            </div>
+
+            <div class="produto-sapato">
+                <img src="https://cdn.cosmos.so/9b7a9dcf-fb7b-4f99-8f64-ef105a57e038?format=jpeg" alt="Salto Amélia">
+                <div class="nome">Salto Amélia</div>
+                <div class="descrição">Salto Alto 8cm</div>
+                <div class="preço">R$1.450,00</div>
+            </div>
+
+            <div class="produto-sapato">
+                <img src="https://cdn.cosmos.so/9e13a2ef-ed8a-4a8b-9ed9-7ca22528a5d6?format=jpeg" alt="Salto Kate">
+                <div class="nome">Salto Kate</div>
+                <div class="descrição">Salto Alto 10cm</div>
+                <div class="preço">R$2.500</div>
+            </div>
+        </div>
     </div>
 
 </body>
+
 </html>
