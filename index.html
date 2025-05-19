@@ -5,121 +5,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estoque de Sapatos</title>
     <style>
-             body {
-      font-family: Arial, sans-serif;
-      margin: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    h1 {
-      color: #333;
-    }
+        h1 {
+            color: #333;
+        }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 1.5rem;
-      gap: 0.5rem;
-    }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            gap: 0.5rem;
+        }
 
-    label {
-      font-weight: bold;
-    }
+        label {
+            font-weight: bold;
+        }
 
-    input {
-      width: 100%;
-      max-width: 300px;
-      padding: 0.4rem;
-      margin-bottom: 0.5rem;
-      box-sizing: border-box;
-    }
+        input {
+            width: 100%;
+            max-width: 300px;
+            padding: 0.4rem;
+            margin-bottom: 0.5rem;
+            box-sizing: border-box;
+        }
 
-    button {
-      padding: 0.4rem 1rem;
-    }
+        button {
+            padding: 0.4rem 1rem;
+        }
 
-    ul {
-      list-style: disc;
-      padding-left: 2rem;
-      max-width: 600px;
-    }
+        ul {
+            list-style: disc;
+            padding-left: 2rem;
+            max-width: 600px;
+        }
 
-    .erro {
-      color: red;
-      font-weight: bold;
-      margin-top: 1rem;
-    }
+        .erro {
+            color: red;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
 
-    @media (max-width: 600px) {
-      body {
-        margin: 1rem;
-      }
-      input, button {
-        width: 100%;
-        max-width: 100%;
-      }
-    }
+        @media (max-width: 600px) {
+            body {
+                margin: 1rem;
+            }
+            input, button {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+        header {
+            background-color: #f8f8f8;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
-    <h1>Estoque de Sapatos</h1>
+    <header>
+        <h1>Estoque de Sapatos</h1>
+    </header>
     <form id="formBusca">
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" placeholder="Digite o nome">
-        <label for="marca">Marca:</label>
-        <input type="text" id="marca" name="marca" placeholder="Digite a marca">
         <label for="tamanho">Tamanho:</label>
         <input type="number" id="tamanho" name="tamanho" placeholder="Digite o tamanho">
-        <button type="submit">Buscar Estoque</button>
+        <button type="submit">Buscar Sapato</button>
     </form>
-    <ul id="minhalista"></ul>
-    <div id="erro" class="erro"></div>
+    <ul id="resultadoBusca"></ul>
+    <div id="mensagemErro" class="erro"></div>
     <script>
-        async function buscaDados(filtros) {
-            let url = "http://localhost:8000/estoque_sapatos";
+        async function buscarSapato(filtros) {
+            let url = "http://localhost:8000/sapatos";
             const params = [];
             if (filtros.nome) params.push(`nome=${encodeURIComponent(filtros.nome)}`);
-            if (filtros.marca) params.push(`marca=${encodeURIComponent(filtros.marca)}`);
             if (filtros.tamanho) params.push(`tamanho=${encodeURIComponent(filtros.tamanho)}`);
             if (params.length > 0) url += "?" + params.join("&");
 
             try {
                 const resposta = await fetch(url);
+                const resultadoBusca = document.getElementById("resultadoBusca");
+                const mensagemErro = document.getElementById("mensagemErro");
+                resultadoBusca.innerHTML = "";
+                mensagemErro.innerText = "";
+
                 if (resposta.status === 200) {
                     const dados = await resposta.json();
-                    const ul = document.getElementById("minhalista");
-                    ul.innerHTML = "";
-                    if (dados.length === 0) {
-                        ul.innerHTML = "<li>Nenhum sapato encontrado.</li>";
-                    } else {
-                        dados.forEach(element => {
-                            const novoli = document.createElement("li");
-                            novoli.innerText = 
-                                `Nome: ${element.nome || '-'} | Marca: ${element.marca || '-'} | Tamanho: ${element.tamanho || '-'}`;
-                            ul.appendChild(novoli);
+                    if (dados.length > 0) {
+                        dados.forEach(sapato => {
+                            const listItem = document.createElement("li");
+                            listItem.innerText = `Nome: ${sapato.nome || '-'} | Marca: ${sapato.marca || '-'} | Tamanho: ${sapato.tamanho || '-'}`;
+                            resultadoBusca.appendChild(listItem);
                         });
+                    } else {
+                        mensagemErro.innerText = "ESSE PRODUTO NÃO EXISTE";
                     }
-                    document.getElementById("erro").innerText = "";
-                } else if (resposta.status === 400) {
-                    const dados = await resposta.json();
-                    document.getElementById("erro").innerText = dados.mensagem || "Erro desconhecido.";
+                } else if (resposta.status === 404) {
+                    const erro = await resposta.json();
+                    mensagemErro.innerText = erro.mensagem || "Produto não encontrado.";
                 } else {
-                    document.getElementById("erro").innerText = "ERRO NÃO IDENTIFICADO";
+                    mensagemErro.innerText = "Erro ao buscar o sapato.";
                 }
-            } catch (e) {
-                document.getElementById("erro").innerText = "Erro ao conectar ao servidor.";
+            } catch (erro) {
+                document.getElementById("mensagemErro").innerText = "Erro ao conectar ao servidor.";
             }
         }
 
         document.getElementById("formBusca").addEventListener("submit", function(e) {
             e.preventDefault();
             const nome = document.getElementById("nome").value.trim();
-            const marca = document.getElementById("marca").value.trim();
             const tamanho = document.getElementById("tamanho").value.trim();
-            buscaDados({ nome, marca, tamanho });
+            buscarSapato({ nome, tamanho });
         });
     </script>
 </body>
