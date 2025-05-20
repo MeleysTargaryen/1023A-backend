@@ -52,7 +52,7 @@ app.get('/estoque_sapatos', async (request: FastifyRequest, reply: FastifyReply)
 });
 
 // Buscar sapatos por nome e tamanho
-app.get('/sapatos', async (request: FastifyRequest, reply: FastifyReply) => {
+app.get('/Sapatos', async (request: FastifyRequest, reply: FastifyReply) => {
     let conn: Connection | null = null;
     const { nome, tamanho } = request.query as { nome?: string; tamanho?: string };
 

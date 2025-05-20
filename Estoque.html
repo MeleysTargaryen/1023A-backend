@@ -37,7 +37,7 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            background-color: #d0cccc;
+            background-color: #c3c4c6;
             padding: 20px;
             max-width: 960px;
             margin: 20px auto;
@@ -56,9 +56,10 @@
         }
 
         .texto p {
-            font-size: 20px;
-            margin-bottom: 10px;
+            font-size: 40px;
+            margin-bottom: 15px;
             font-weight: bold;
+            font-family: 'Times New Roman', Times, serif;
         }
 
         .texto button {
@@ -69,6 +70,7 @@
             cursor: pointer;
             border-radius: 5px;
             font-size: 16px;
+            font-family: 'Times New Roman', Times, serif;
         }
 
         .container {
@@ -127,24 +129,24 @@
                 text-align: center;
             }
         }
+        
     </style>
 </head>
 
 <body>
-
     <header>
         <h1><em>Maison Evangeline</em></h1>
     </header>
 
     <!-- Bloco com vídeo -->
     <div class="bloco-estoque">
-        <video controls>
+        <video autoplay muted loop>
             <source src="https://cdn.cosmos.so/31fbae5b-3915-4891-9b9f-51928fb6bf18.mp4" type="video/mp4">
-            Seu navegador não suporta vídeo.
         </video>
         <div class="texto">
             <p>Confira o nosso estoque</p>
-            <button>Ver Estoque</button>
+            <button onclick="window.location.href='index.html'"> Ver Estoque</button>
+
         </div>
     </div>
 
@@ -153,7 +155,7 @@
         <h1>Produtos Disponíveis</h1>
         <div class="container">
             <div class="produto-sapato">
-                <img src="https://cdn.cosmos.so/e8e753aa-bbd3-4118-85d2-74c0c1b9a52b?format=jpeg" alt="Salto Raysa">
+                <img src="https://cdn.cosmos.so/f8449a6f-90c7-41ae-8b2e-4db520d4ab0c?format=jpeg" alt="Salto Raysa">
                 <div class="nome">Salto Raysa</div>
                 <div class="descrição">Salto Alto 15cm</div>
                 <div class="preço">R$5.000</div>
@@ -167,11 +169,12 @@
             </div>
 
             <div class="produto-sapato">
-                <img src="https://cdn.cosmos.so/9e13a2ef-ed8a-4a8b-9ed9-7ca22528a5d6?format=jpeg" alt="Salto Kate">
+                <img src="https://cdn.cosmos.so/15bd28de-57e6-4d26-a9d3-217b0c7cb6cd?format=jpeg" alt="Salto Kate">
                 <div class="nome">Salto Kate</div>
                 <div class="descrição">Salto Alto 10cm</div>
                 <div class="preço">R$2.500</div>
             </div>
+            
         </div>
     </div>
 
