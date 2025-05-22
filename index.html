@@ -6,6 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maison Evangeline</title>
     <style>
+        :root {
+            --cor-primaria: #590202;
+            --cor-secundaria: #6e5a58;
+            --fundo-claro: rgb(243, 241, 241);
+            --fundo-container: #c3c4c6;
+            --branco: #ffffff;
+            --texto-escuro: #333;
+            --cor-erro: #dc3545;
+            --cor-sucesso: #28a745;
+            --cor-borda: #ddd;
+            --sombra-leve: rgba(0, 0, 0, 0.1);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -13,177 +26,291 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: rgb(243, 241, 241);
-            padding-top: 100px;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--fundo-claro);
+            padding-top: 60px;
+            color: var(--texto-escuro);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
         }
 
-         h1 {
-            font-size: 24px;
-            letter-spacing: 1px;
-            font-family: 'Times New Roman', Times, serif;
-            color: white;
-        }
-
-        .container {
-            background-color: #c3c4c6;
+        .conteudo-principal {
+            background-color: var(--fundo-container);
             width: 90%;
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
-            padding: 40px 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
-        .container h2 {
-            font-size: 20px;
+        .conteudo-principal h2 {
+            font-size: 1.8em;
             margin-bottom: 10px;
+            color: var(--cor-primaria);
         }
 
-        .container p {
-            font-size: 16px;
-            margin-bottom: 30px;
+        .conteudo-principal p {
+            font-size: 1em;
+            margin-bottom: 20px;
+            line-height: 1.5;
         }
 
-        form {
+        .formulario {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
             align-items: center;
         }
 
         label {
             align-self: flex-start;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 0.9em;
+            color: var(--texto-escuro);
         }
 
         input {
             width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            background-color: #ffffff;
-          
+            padding: 10px 12px;
+            border: 1px solid var(--cor-borda);
+            border-radius: 5px;
+            background-color: var(--branco);
+            font-size: 1em;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--cor-primaria);
         }
 
         button {
             padding: 10px 20px;
-            background-color: #590202;
-            color: white;
+            background-color: var(--cor-primaria);
+            color: var(--branco);
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
+            font-size: 1.05em;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+            margin-top: 10px;
         }
 
         button:hover {
-            background-color: #6e5a58;
+            background-color: var(--cor-secundaria);
+            transform: translateY(-2px);
         }
 
-        #resultadoBusca {
-            margin-top: 30px;
+        button:active {
+            transform: translateY(0);
+        }
+
+        .area-resultados {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            overflow-x: auto;
+        }
+
+        .area-resultados table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px var(--sombra-leve);
+            background-color: var(--branco);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .area-resultados th,
+        .area-resultados td {
+            border: 1px solid var(--cor-borda);
+            padding: 12px 15px;
             text-align: left;
-            padding-left: 20px;
+            font-size: 0.95em;
+            word-wrap: break-word;
         }
 
-        .erro {
-            color: red;
+        .area-resultados th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+            color: var(--texto-escuro);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .area-resultados tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .area-resultados tr:hover {
+            background-color: #dcdcdc;
+        }
+
+        .mensagem-erro {
+            color: var(--cor-erro);
             margin-top: 15px;
             font-weight: bold;
+            font-size: 1em;
+        }
+
+        .mensagem-sucesso {
+            color: var(--cor-sucesso);
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1em;
         }
 
         @media (max-width: 600px) {
-            .container {
-                width: 90%;
+            body {
+                padding-top: 40px;
+            }
+
+            .conteudo-principal {
+                width: 95%;
                 padding: 20px;
             }
 
             input,
             button {
-                font-size: 16px;
+                font-size: 0.95em;
+                padding: 8px 10px;
+            }
+
+            .area-resultados th,
+            .area-resultados td {
+                padding: 10px;
+                font-size: 0.85em;
             }
         }
-        #videoFundo {
-         position: fixed;
-         top: 0;
-         left: 0;
-         min-width: 100%;
-         min-height: 100%;
-         z-index: -1; /*Serve para o vídeo não sobrepor a imagem*/
-         object-fit: cover;
-         opacity: 0.8; 
-}
 
+        #fundo-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            opacity: 0.8;
+        }
     </style>
 </head>
 
 <body>
-     <video autoplay muted loop id="videoFundo">
+    <video autoplay muted loop id="fundo-video">
         <source src="https://cdn.cosmos.so/ee26bfa2-155d-427b-b735-5215ac04eb23.mp4" type="video/mp4">
-       
+        Seu navegador não suporta vídeo.
     </video>
 
-    <div class="container">
+    <div class="conteudo-principal">
         <h2>OS MELHORES SAPATOS ESTÃO AQUI</h2>
-        <p>O que você procura?</p>
-        <form id="formBusca">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" placeholder="Digite o nome do sapato" />
+        <p>Encontre o seu par perfeito na Maison Evangeline.</p>
+        <form id="form-busca">
+            <label for="nome-sapato">Nome do Sapato:</label>
+            <input type="text" id="nome-sapato" name="nome-sapato"  />
 
-            <label for="tamanho">Tamanho:</label>
-            <input type="number" id="tamanho" name="tamanho" placeholder="Digite o tamanho" />
+            <label for="tamanho-sapato">Tamanho:</label>
+            <input type="number" id="tamanho-sapato" name="tamanho-sapato"  min="1" />
 
             <button type="submit">Buscar Sapato</button>
         </form>
 
-        <ul id="resultadoBusca"></ul>
-        <div id="mensagemErro" class="erro"></div>
+        <div id="area-mensagem-erro" class="mensagem-erro"></div>
+        <div id="area-mensagem-sucesso" class="mensagem-sucesso"></div>
+        <div id="area-resultados" class="area-resultados"></div>
     </div>
-       
+
     <script>
         async function buscarSapato(filtros) {
+            const divResultados = document.getElementById("area-resultados");
+            const divErro = document.getElementById("area-mensagem-erro");
+            const divSucesso = document.getElementById("area-mensagem-sucesso");
+
+            divResultados.innerHTML = "";
+            divErro.innerText = "";
+            divSucesso.innerText = "";
+
+            
+            if (!filtros.nome) {
+                divErro.innerText = "Por favor, insira o nome do sapato para buscar.";
+                return;
+            }
+
             let url = "http://localhost:8000/Sapatos";
-            const params = [];
-            if (filtros.nome) params.push(`nome=${encodeURIComponent(filtros.nome)}`);
-            if (filtros.tamanho) params.push(`tamanho=${encodeURIComponent(filtros.tamanho)}`);
-            if (params.length > 0) url += "?" + params.join("&");
+            const parametros = [];
+            parametros.push(`nome=${encodeURIComponent(filtros.nome)}`); 
+            if (filtros.tamanho) {
+                parametros.push(`tamanho=${encodeURIComponent(filtros.tamanho)}`);
+            }
+            url += "?" + parametros.join("&");
 
             try {
                 const resposta = await fetch(url);
-                const resultadoBusca = document.getElementById("resultadoBusca");
-                const mensagemErro = document.getElementById("mensagemErro");
-                resultadoBusca.innerHTML = "";
-                mensagemErro.innerText = "";
 
                 if (resposta.status === 200) {
                     const dados = await resposta.json();
                     if (dados.length > 0) {
-                        dados.forEach(sapato => {
-                            const listItem = document.createElement("li");
-                            listItem.innerText = `Nome: ${sapato.nome || '-'} | Marca: ${sapato.marca || '-'} | Tamanho: ${sapato.tamanho || '-'}`;
-                            resultadoBusca.appendChild(listItem);
+                        divSucesso.innerText = "Sapato disponível!";
+
+                        const tabela = document.createElement("table");
+                        const cabecalho = document.createElement("thead");
+                        const corpoTabela = document.createElement("tbody");
+
+                        const linhaCabecalho = document.createElement("tr");
+                        ["Nome", "Marca", "Tamanho"].forEach(texto => {
+                            const th = document.createElement("th");
+                            th.innerText = texto;
+                            linhaCabecalho.appendChild(th);
                         });
+                        cabecalho.appendChild(linhaCabecalho);
+                        tabela.appendChild(cabecalho);
+
+                        dados.forEach(sapato => {
+                            const linhaDados = document.createElement("tr");
+                            const tdNome = document.createElement("td");
+                            tdNome.innerText = sapato.nome || '-';
+                            const tdMarca = document.createElement("td");
+                            tdMarca.innerText = sapato.marca || '-';
+                            const tdTamanho = document.createElement("td");
+                            tdTamanho.innerText = sapato.tamanho || '-';
+
+                            linhaDados.appendChild(tdNome);
+                            linhaDados.appendChild(tdMarca);
+                            linhaDados.appendChild(tdTamanho);
+                            corpoTabela.appendChild(linhaDados);
+                        });
+                        tabela.appendChild(corpoTabela);
+                        divResultados.appendChild(tabela);
                     } else {
-                        mensagemErro.innerText = "ESSE PRODUTO NÃO EXISTE";
+                        divErro.innerText = "ESSE PRODUTO NÃO EXISTE";
                     }
                 } else if (resposta.status === 404) {
-                    const erro = await resposta.json();
-                    mensagemErro.innerText = erro.mensagem || "Produto não encontrado.";
+                    const erroResposta = await resposta.json();
+                    divErro.innerText = erroResposta.mensagem || "Produto não encontrado.";
                 } else {
-                    mensagemErro.innerText = "Erro ao buscar o sapato.";
+                    divErro.innerText = "Erro ao buscar o sapato.";
                 }
             } catch (erro) {
-                document.getElementById("mensagemErro").innerText = "Erro ao conectar ao servidor.";
+                divErro.innerText = "Erro ao conectar ao servidor.";
             }
         }
 
-        document.getElementById("formBusca").addEventListener("submit", function (e) {
+        document.getElementById("form-busca").addEventListener("submit", function (e) {
             e.preventDefault();
-            const nome = document.getElementById("nome").value.trim();
-            const tamanho = document.getElementById("tamanho").value.trim();
+            const nome = document.getElementById("nome-sapato").value.trim();
+            const tamanho = document.getElementById("tamanho-sapato").value.trim();
             buscarSapato({ nome, tamanho });
         });
     </script>
